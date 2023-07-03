@@ -1,4 +1,4 @@
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import FirebaseContext from "../context/firebase";
 
@@ -24,7 +24,7 @@ function Login() {
         <img src="/images/iphone-with-profile.jpg" alt="iPhone with Ins app" />
       </div>
       <div className="flex flex-col w-2/5">
-        <div className="flex flex-col item-center bg-white p-4 border border-gray-primary mb-4">
+        <div className="flex flex-col item-center bg-white p-4 border border-gray-primary mb-4 rounded">
           <h1 className="flex justify-center w-full">
           <img
             src="/images/logo.png"
@@ -52,7 +52,7 @@ function Login() {
             <button
               disabled={isInvalid}
               type="submit"
-              className={`bg-blue-500 text-white w-full rounded h-8 font-bold ${
+              className={`bg-blue-medium text-white w-full rounded h-8 font-bold ${
                 isInvalid && 'opacity-50'
               }`}
             >
@@ -60,8 +60,11 @@ function Login() {
             </button>
           </form>
         </div>
-        <div className="flex justify-center items-center flex-col w-full bg-white p-4 border border-gray-primary">
+        <div className="flex justify-center items-center flex-col w-full bg-white p-4 rounded border border-gray-primary">
           <p className="text-sm"> Don't have an account?{''}</p>
+          <Link to="/signup" className="font-bold text-blue-medium">
+            Sign up
+          </Link>
         </div>
       </div>
     </div>
