@@ -24,7 +24,7 @@ function Login() {
         <img src="/images/iphone-with-profile.jpg" alt="iPhone with Ins app" />
       </div>
       <div className="flex flex-col w-2/5">
-        <h1 className="flex justify-centerw-full">
+        <h1 className="flex justify-center w-full">
           <img
             src="/images/logo.png"
             alt="Instagram"
