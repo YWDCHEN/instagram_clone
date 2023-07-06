@@ -5,7 +5,7 @@ import * as ROUTES from '../constants/routes';
 import {doesUsernameExist} from '../services/firebase';
 
 function Signup() {
-  const history = useNavigate();
+  const navigate = useNavigate();
   const {firebase} = useContext(FirebaseContext);
 
   const [emailAddress, setEmailAdress] = useState('');
@@ -21,8 +21,8 @@ function Signup() {
     e.preventDefault();
 
     const usernameExist = await doesUsernameExist(username);
-
-    if (!usernameExist) {
+    //[].length == 0, if false enter the loop
+    if (!usernameExist.length) {
       try {
         const createdUserResult = await firebase
           .auth()
@@ -40,14 +40,14 @@ function Signup() {
           dateCreated: Date.now(),
         });
 
-        history.push(ROUTES.DASHBOARD);
+        navigate(ROUTES.DASHBOARD);
       } catch (error) {
         setFullname('');
         setEmailAdress('');
         setPassword('');
         setError(error.message);
       }
-    }else{
+    } else {
       setError('This username is already taken, please try another.');
     }
   };
@@ -64,16 +64,16 @@ function Signup() {
       <div className="flex flex-col w-2/5">
         <div className="flex flex-col item-center bg-white p-4 border border-gray-primary mb-4 rounded">
           <h1 className="flex justify-center w-full">
-          <img
-            src="/images/logo.png"
-            alt="Instagram"
-            className="mt-2 w-6/12 mb-4"
-          />
+            <img
+              src="/images/logo.png"
+              alt="Instagram"
+              className="mt-2 w-6/12 mb-4"
+            />
           </h1>
           {error && <p className="mb-4 text-xs text-red-primary"> {error} </p>}
 
           <form onSubmit={handleLogin} method="POST">
-          <input
+            <input
               aria-label="Enter your username"
               type="text"
               placeholder="Username"
@@ -117,9 +117,11 @@ function Signup() {
           </form>
         </div>
         <div className="flex justify-center items-center flex-col w-full bg-white p-4 rounded border border-gray-primary">
-          <p className="text-sm"> Have an account?{' '}
+          <p className="text-sm">
+            {' '}
+            Have an account?{' '}
             <Link to="/login" className="font-bold text-blue-medium">
-            Log In
+              Log In
             </Link>
           </p>
         </div>
