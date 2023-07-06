@@ -5,14 +5,16 @@ import * as ROUTES from './constants/routes';
 
 const Login = lazy(() => import('./pages/login'));
 const Signup = lazy(() => import('./pages/signup'));
+const NotFound = lazy(() => import('./pages/not-found'));
 
 function App() {
   return (
     <BrowserRouter>
       <Suspense fallback={<p>Loading...</p>}>
         <Routes>
-          <Route path="/login" Component={Login} />
-          <Route path="/signup" Component={Signup} />
+          <Route path={ROUTES.LOGIN} Component={Login} />
+          <Route path={ROUTES.SIGN_UP} Component={Signup} />
+          <Route path={ROUTES.NOT_FOUND} Component={NotFound} />
         </Routes>
       </Suspense>
     </BrowserRouter>
