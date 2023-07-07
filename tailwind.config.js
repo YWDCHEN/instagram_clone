@@ -14,7 +14,7 @@ module.exports = {
         medium: '#005C98',
       },
       black: {
-        light: '#005C98',
+        light: '#262626',
         faded: '#00000059',
       },
       gray: {
