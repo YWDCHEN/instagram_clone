@@ -1,3 +1,3 @@
-export default function Timeline(){
+export default function Timeline() {
   return <p>timeline </p>;
 }

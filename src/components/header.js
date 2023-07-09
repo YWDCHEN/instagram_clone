@@ -3,7 +3,7 @@ import FirebaseContext from '../context/firebase';
 import UserContext from '../context/user';
 import * as ROUTES from '../constants/routes';
 import {Link, useNavigate} from 'react-router-dom';
-import { DEFAULT_IMAGE_PATH } from '../constants/paths';
+import {DEFAULT_IMAGE_PATH} from '../constants/paths';
 import useUser from '../hooks/use-user';
 
 export default function Header() {
@@ -76,24 +76,39 @@ export default function Header() {
                     />
                   </svg>
                 </button>
-                {user &&(
+                {user && (
                   <div className="flex items-center cursor-pointer">
                     <Link to={'./p/${user?.username}'}>
                       <img
                         className="rounded-full h-8 w-8 flex"
                         src={'/images/avatars/${user?.username}.jpg'}
                         alt={`${user?.username} profile`}
-                        onError={(e) => {
+                        onError={e => {
                           e.target.src = DEFAULT_IMAGE_PATH;
                         }}
-                          />
+                      />
                     </Link>
                   </div>
                 )}
               </>
-              //stoped here! 
             ) : (
               <>
+                <Link to={ROUTES.LOGIN}>
+                  <button
+                    type="button"
+                    className="bg-blue-medium font-bold text-sm rounded text-white w-20 h-8"
+                  >
+                    Log In
+                  </button>
+                </Link>
+                <Link to={ROUTES.SIGN_UP}>
+                  <button
+                    type="button"
+                    className="bg-blue-medium font-bold text-sm rounded text-white w-20 h-8"
+                  >
+                    Sign Up
+                  </button>
+                </Link>
               </>
             )}
           </div>
