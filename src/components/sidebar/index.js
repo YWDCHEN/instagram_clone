@@ -1,17 +1,16 @@
-import useUser from "../../hooks/use-user";
-import User from "./user";
-import Suggestions from "./suggestions";
+import useUser from '../../hooks/use-user';
+import User from './user';
+import Suggestions from './suggestions';
 
 export default function Sidebar(){
   const {
-    user
+    user: {fullname, username, userId},
   } = useUser();
 
-//cannot read the value!!!
   return (
     <div className="p-4">
-      <User username={user['username']} fullname={user['fullname']}/>
-      <Suggestions userId={user['userId']}/>
+      <User username={username} fullname={fullname} />
+      <Suggestions userId={userId} />
     </div>
   );
 }
