@@ -17,7 +17,7 @@ function Signup() {
   // eslint-disable-next-line eqeqeq
   const isInvalid = password == '' || emailAddress == '';
 
-  const handleLogin = async e => {
+  const handleSignUp = async e => {
     e.preventDefault();
 
     const usernameExist = await doesUsernameExist(username);
@@ -31,14 +31,18 @@ function Signup() {
           displayName: username,
         });
 
-        await firebase.firestore().collection('user').add({
-          userId: createdUserResult.user.uid,
-          username: username.toLowerCase(),
-          fullname,
-          emailAddress: emailAddress.toLowerCase(),
-          following: [],
-          dateCreated: Date.now(),
-        });
+        await firebase
+          .firestore()
+          .collection('users')
+          .add({
+            userId: createdUserResult.user.uid,
+            username: username.toLowerCase(),
+            fullname,
+            emailAddress: emailAddress.toLowerCase(),
+            following: ['2'],
+            follwers: [],
+            dateCreated: Date.now(),
+          });
 
         navigate(ROUTES.DASHBOARD);
       } catch (error) {
@@ -48,6 +52,7 @@ function Signup() {
         setError(error.message);
       }
     } else {
+      setUsername('');
       setError('This username is already taken, please try another.');
     }
   };
@@ -72,7 +77,7 @@ function Signup() {
           </h1>
           {error && <p className="mb-4 text-xs text-red-primary"> {error} </p>}
 
-          <form onSubmit={handleLogin} method="POST">
+          <form onSubmit={handleSignUp} method="POST">
             <input
               aria-label="Enter your username"
               type="text"
