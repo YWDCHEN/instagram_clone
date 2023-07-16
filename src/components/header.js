@@ -79,10 +79,10 @@ export default function Header() {
                 </button>
                 {user && (
                   <div className="flex items-center cursor-pointer">
-                    <Link to={'./p/${user?.displayName}'}>
+                    <Link to={`./p/${user?.displayName}`}>
                       <img
                         className="rounded-full h-8 w-8 flex"
-                        src={'/images/avatars/ywdchen.jpg'}
+                        src={`/images/avatars/${user.displayName}.jpg`}
                         alt={`${user?.displayName} profile`}
                         onError={e => {
                           e.target.src = DEFAULT_IMAGE_PATH;
