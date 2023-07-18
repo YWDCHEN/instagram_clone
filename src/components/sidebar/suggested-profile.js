@@ -18,7 +18,6 @@ export default function SuggestedProfile({
 
     await updateLoggedInUserFollowing(loggedInUserDocId, profileId, false);
     await updateFollowedUserFollowers(profileDocId, userId, false);
-
   }
 
   return !follow ? (
