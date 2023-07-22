@@ -1,21 +1,24 @@
 import useUser from '../../hooks/use-user';
-import {memo} from 'react';
 import User from './user';
 import Suggestions from './suggestions';
 
 const Sidebar = () => {
   const {
-    user: {fullname, username, userId},
+    user: {docId,fullname, username, userId, following},
   } = useUser();
 
   return (
     <div className="p-4">
       <User username={username} fullname={fullname} />
-      <Suggestions userId={userId} />
+      <Suggestions
+        userId={userId}
+        following={following}
+        loggedInUserDocId={docId}
+      />
     </div>
   );
 };
 
-export default memo(Sidebar);
+export default Sidebar;
 
-Sidebar.whyDidYouRender = true;
+// Sidebar.whyDidYouRender = true;
