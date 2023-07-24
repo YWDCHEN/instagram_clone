@@ -11,7 +11,7 @@ export default function Header({username}) {
             src={`/images/avatars/${username}.jpg`}
             alt={`${username} profile picture`}
           />
-          <p className="font-bold"> {username}</p>
+          <p className="font-bold indent-2"> {username}</p>
         </Link>
       </div>
     </div>
