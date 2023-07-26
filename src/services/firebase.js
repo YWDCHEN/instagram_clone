@@ -13,6 +13,19 @@ export async function doesUsernameExist(username) {
   return result.docs.map(user => user.data().length > 0);
 }
 
+export async function getUserByUsername(username) {
+  const result = await firebase
+    .firestore()
+    .collection('users')
+    .where('username', '==', username)
+    .get();
+
+  return result.docs.map(item => ({
+    ...item.data(),
+    docId: item.id,
+  }));
+}
+
 //get user from the firestore based on the userId passed by the auth
 export async function getUserByUserId(userId) {
   const result = await firebase
@@ -97,4 +110,37 @@ export async function getPhotos(userId, following) {
     })
   );
   return photoWithUserDetails;
+}
+
+export async function getUserPhotosByUsername(username) {
+  const [user] = await getUserByUsername(username);
+  const result = await firebase
+    .firestore()
+    .collection('photos')
+    .where('userId', '==', user.userId)
+    .get();
+
+  return result.docs.map(item => ({
+    ...item.data(),
+    docId: item.id,
+  }));
+}
+
+export async function isUserFollowingProfile({
+  loggedInUserUsername,
+  profileUserId,
+}) {
+  const result = await firebase
+    .firestore()
+    .collection('users')
+    .where('username', '==', loggedInUserUsername)
+    .where('following', 'array-contains', profileUserId)
+    .get();
+
+  const [response = {}] = result.docs.map(item => ({
+    ...item.data(),
+    docId: item.id,
+  }));
+
+  console.log('response', response);
 }
