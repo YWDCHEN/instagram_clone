@@ -11,7 +11,7 @@ export default function Header({
   setFollowerCount,
 }) {
   const {user} = useUser();
-  const [isFollowingProfile, setIsFollowingProfile] = useState();
+  const [isFollowingProfile, setIsFollowingProfile] = useState(false);
 
   useEffect(() => {
     const isLoggedInUserFollowingProfile = async () => {

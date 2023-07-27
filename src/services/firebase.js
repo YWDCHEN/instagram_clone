@@ -126,10 +126,10 @@ export async function getUserPhotosByUsername(username) {
   }));
 }
 
-export async function isUserFollowingProfile({
+export async function isUserFollowingProfile(
   loggedInUserUsername,
   profileUserId,
-}) {
+) {
   const result = await firebase
     .firestore()
     .collection('users')
