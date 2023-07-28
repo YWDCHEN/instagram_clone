@@ -45,7 +45,7 @@ export default function SuggestedProfile({
   ) : null;
 }
 
-SuggestedProfile.prototype = {
+SuggestedProfile.propType = {
   profileDocId: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
   profileId: PropTypes.string.isRequired,
