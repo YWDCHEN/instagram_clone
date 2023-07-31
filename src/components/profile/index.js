@@ -2,13 +2,13 @@ import PropTypes from 'prop-types';
 import Header from './header';
 import Photos from './photos';
 import {useReducer, useEffect} from 'react';
-import {getUserPhotosByUsername} from '../../services/firebase';
+import {getUserPhotosByUserId} from '../../services/firebase';
 
 export default function Profile({user}) {
   const reducer = (state, newState) => ({...state, ...newState});
   const initialState = {
     profile: {},
-    photoCollection: [],
+    photosCollection: [],
     followerCount: 0,
   };
 
@@ -19,7 +19,7 @@ export default function Profile({user}) {
 
   useEffect(() => {
     async function getProfileInfoAndPhotos() {
-      const photos = getUserPhotosByUsername(user.username);
+      const photos = await getUserPhotosByUserId(user.userId);
       dispatch({
         profile: user,
         photosCollection: photos,
@@ -27,7 +27,8 @@ export default function Profile({user}) {
       });
     }
     getProfileInfoAndPhotos();
-  }, [user, user.username]);
+
+  }, [user]);
 
   return (
     <>
@@ -37,8 +38,7 @@ export default function Profile({user}) {
         followerCount={followerCount}
         setFollowerCount={dispatch}
       />
-      {/* <Photos photos={photosCollection} /> */}
-      <p> hello {user.username} </p>
+      <Photos photos={photosCollection} />
     </>
   );
 }

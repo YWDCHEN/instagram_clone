@@ -19,9 +19,8 @@ export default function Profile() {
         navigate(ROUTES.NOT_FOUND);
       }
     }
-
     checkUserExists();
-  }, [navigate, user, username]);
+  }, [navigate, username]);
 
   return user?.username ? (
     <div className="bg-gray-background">
